@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(); // genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
+Auth::routes(); // Auth::routes() genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth'); // ->middleware sta in mezzo fra Auth::routes() e Route::get per verificare che l'utente sia loggato o autenticato
