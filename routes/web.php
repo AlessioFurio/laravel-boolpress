@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('index'); // questa rotta punta alla home page da utenti non loggati
+Route::get('/contatti', 'HomeController@contatti')->name('contatti');
 
-Auth::routes(); // Auth::routes() genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
+Auth::routes(['register' => false]); // Auth::routes() genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
+// ['register' => false] disabilita la registrazione al sito
 
 
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
