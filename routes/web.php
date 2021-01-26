@@ -25,4 +25,5 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->
     Route::get('/', 'HomeController@index')->name('index') ; // ->middleware sta in mezzo fra Auth::routes() e Route::get per verificare che l'utente sia loggato o autenticato
 
     // questo viene fatto per gli utenti loggati, puo' sembrare uguale alla prima route ma non lo e' perche' si trova nel ->group(function(){}
+    Route::resource('/posts', 'PostController'); 
 }); // questo viene fatto perche' avremo una index sia pubblica che da utenti loggati
