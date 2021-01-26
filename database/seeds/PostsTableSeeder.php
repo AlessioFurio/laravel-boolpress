@@ -41,9 +41,26 @@ class PostsTableSeeder extends Seeder
 
         for ($i=0; $i < 10 ; $i++) {
             $new_post = new Post();
-            $new_post->name = $faker->FirstName();
-            $new_post->lastname = $faker->lastName();
-            $new_post->date_of_birth = $faker->date();
+            $new_post->title = $faker->sentence();
+            $new_post->content = $faker->text(500);
+
+            $slug = Str::slug($new_post->title);
+            $slug_base = $slug; // slavo la "radice base " dello slug
+
+            $current_post = Post::where('slug', $slug)->first();  // controllo se nella colonna slug e' gia' presente lo $slug (con Post::where) e ::first mi restituisce un oggetto di tipo post o restituisce null
+
+            //se la query in $current_pos restituisce un valore e quindi diverso da null, verifico che il post corrente sia uguale ad un post esistente, se si allora concateno un -1, -2 etc....
+            $contatore = 1;
+            while($current_post){
+
+                $slug = $slug_base . '-' . $contatore; // concateno il contatore x rendere diverso lo slug
+                $contatore++;
+                $current_post = Post::where('slug', $slug)->first(); // rifaccio la query x cercare che il nuovo slug, al primo giro sara' .-1, non sia presente nel DB finche' il while non diventa falso
+
+            }
+
+            $new_post->slug = $slug;
+
             $new_post->save();
         }
     }
