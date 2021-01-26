@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('index'); // questa rotta punta alla home page da utenti non loggati
 
 Auth::routes(); // Auth::routes() genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth'); // ->middleware sta in mezzo fra Auth::routes() e Route::get per verificare che l'utente sia loggato o autenticato
+
+Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+
+    Route::get('/', 'HomeController@index')->name('index') ; // ->middleware sta in mezzo fra Auth::routes() e Route::get per verificare che l'utente sia loggato o autenticato
+
+    // questo viene fatto per gli utenti loggati, puo' sembrare uguale alla prima route ma non lo e' perche' si trova nel ->group(function(){}
+}); // questo viene fatto perche' avremo una index sia pubblica che da utenti loggati
