@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes(); // genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
+
+Route::get('/home', 'HomeController@index')->name('home');
