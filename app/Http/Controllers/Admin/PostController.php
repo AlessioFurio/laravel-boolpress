@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -30,7 +31,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $data = [
+            'categories' => Category::all() // recupero tutte le categorie dal model Category
+        ];
+        return view('admin.posts.create', $data);
     }
 
     /**
@@ -42,7 +46,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
-        $form_data = $request->all();
+        $form_data = $request->all(); // dentro il $form_data, mi trovo tutti gli input che hanno un name come attributo nell html
         $new_post = new Post();
         $new_post->fill($form_data);
         // genero lo slug

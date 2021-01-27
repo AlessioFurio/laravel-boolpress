@@ -17,21 +17,24 @@
                     <label>Titolo</label>
                     <input type="text" name="title" class="form-control" placeholder="Inserisci il titolo" maxlength="255" required>
                 </div>
+
                 <div class="form-group">
                     <label>Contenuto</label>
                     <textarea name="content" class="form-control" rows="10" placeholder="Inizia a scrivere qualcosa..." required></textarea>
                 </div>
-                {{-- <div class="form-group">
+
+                <div class="form-group">
                     <label>Categoria</label>
-                    <select class="form-control" name="category_id">
+                    <select class="form-control" name="category_id"> {{-- per inviare i dati con il form dobbiamo associare un name che sara' category_id perche' la categoria che seleziono nella select, andra' ad impostarsi nella colonna category_id della tabella posts --}}
                         <option value="">-- seleziona categoria --</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">
-                                {{ $category->name }}
+                            <option value="{{ $category->id }}"> {{-- come value passo $category->id perche' deve collegarsi a category_id e definirlo --}}
+                                {{ $category->name }} {{-- popolo la option con le varie categorie prese dal model Category --}}
                             </option>
                         @endforeach
                     </select>
-                </div> --}}
+                </div>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Crea post

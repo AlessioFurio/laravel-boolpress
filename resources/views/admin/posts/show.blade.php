@@ -6,9 +6,10 @@
         <div class="col-12">
             <h1>Dettagli</h1>
             <ul>
-                    <li>{{ $post->title }}</li>
-                    <li>{{ $post->content }}</li>
-                    <li>{{ $post->slug }}</li>
+                    <li>Titolo: {{ $post->title }}</li>
+                    <li>Contenuto: {{ $post->content }}</li>
+                    <li>Slug: {{ $post->slug }}</li>
+                    <li>Categoria: {{$post->category != null ? $post->category->name : 'Nessuna Categoria' }}</li>
             </ul>
 
         </div>
