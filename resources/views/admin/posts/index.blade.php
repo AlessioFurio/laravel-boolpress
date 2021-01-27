@@ -20,16 +20,14 @@
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->slug }}</td>
                             <td>
-                                <a href="{{ route('admin.posts.show', ['post' => $item->id]) }}" class="btn btn-info">Dettagli</a>
+                                <a href="{{ route('admin.posts.show', ['post' => $item->id]) }}" class="btn btn-info btn-sm">Dettagli</a>
 
-                                <a href="{{ route('admin.posts.edit', ['post' => $item->id]) }}" class="btn btn-warning">Modifica</a>
+                                <a href="{{ route('admin.posts.edit', ['post' => $item->id]) }}" class="btn btn-warning btn-sm">Modifica</a>
 
                                 <form class="d-inline-block" action="{{ route('admin.posts.destroy', ['post' => $item->id]) }}" method="post">
                                    @csrf
                                    @method('DELETE')
-                                   <button type="submit" class="btn btn-danger">
-                                       Elimina
-                                   </button>
+                                   <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
                                </form>
 
                             </td>
