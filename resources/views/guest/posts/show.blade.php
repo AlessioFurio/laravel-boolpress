@@ -17,14 +17,7 @@
             <a href="https://github.com/laravel/laravel">GitHub</a>
         </div>
     </div>
+        <h1>titolo Post: {{ $post->title }}</h1>
+        <p>{{ $post->content }}</p>
 
-        <ul>
-            @foreach ($posts as $item)
-                <a href="{{ route('posts.show', ['post'=> $item->id]) }}">
-                    <li>
-                        {{ $item->title }}
-                    </li>
-                </a>
-            @endforeach
-        </ul>
 @endsection
