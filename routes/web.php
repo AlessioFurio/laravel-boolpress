@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('index'); // questa rotta punta alla home page da utenti non loggati
 Route::get('/contatti', 'HomeController@contatti')->name('contatti');
+Route::get('/posts', 'PostController@index')->name('posts.index');
 
 Auth::routes(['register' => false]); // Auth::routes() genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
 // ['register' => false] disabilita la registrazione al sito
@@ -25,5 +26,6 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->
     Route::get('/', 'HomeController@index')->name('index') ; // ->middleware sta in mezzo fra Auth::routes() e Route::get per verificare che l'utente sia loggato o autenticato
 
     // questo viene fatto per gli utenti loggati, puo' sembrare uguale alla prima route ma non lo e' perche' si trova nel ->group(function(){}
-    Route::resource('/posts', 'PostController'); 
+    Route::resource('/posts', 'PostController');
+
 }); // questo viene fatto perche' avremo una index sia pubblica che da utenti loggati
