@@ -20,7 +20,7 @@
 
         <ul>
             @foreach ($posts as $item)
-                <a href="{{ route('posts.show', ['post'=> $item->id]) }}">
+                <a href="{{ route('posts.show', ['post'=> $item->slug]) }}">
                     <li>
                         {{ $item->title }}
                     </li>
