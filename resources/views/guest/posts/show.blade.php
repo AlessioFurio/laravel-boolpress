@@ -21,7 +21,7 @@
                 <h1>titolo Post: {{ $post->title }}</h1>
                 <p>{{ $post->content }}</p>
 
-                @if ($post->category != null) {{--mi assicuro che la categoria esista, altrimenti se fosse null mi darebbe errore nella generazione del link qui sotto--}}
+                @if ($post->category != null) {{--mi assicuro che la categoria sia associata ad un post, altrimenti se fosse null mi darebbe errore nella generazione del link qui sotto--}}
 
                     <a href="{{ route('categories.show', ['slug' => $post->category->slug]) }}">{{ $post->category->name }}</a>
                 @else

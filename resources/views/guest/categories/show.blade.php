@@ -19,8 +19,17 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
 
-                <h1>La categoria: {{ $category->name }}</h1>
                 <strong>qui stampo nome categoria</strong>
+                <h1>La categoria: {{ $category->name }}</h1>
+
+                <strong>I post relativi a questa categoria sono:</strong>
+                <ul>
+                @foreach ($category->posts as $item)
+                    <li>
+                        {{$item->title }}
+                    </li>
+                @endforeach
+                </ul>
             </div>
         </div>
     </div>
