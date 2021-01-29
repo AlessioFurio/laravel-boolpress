@@ -11,4 +11,8 @@ class Post extends Model
     public function category(){  // tabella secondaria, dipendente da posts
         return $this->belongsTo('App\Category'); // sapendo che e' la tabella secondaria ci andra' x forza ->belongsTo
     }
+
+    public function tags(){
+        return $this->belongsToMany('App\Tag');
+    }
 }
