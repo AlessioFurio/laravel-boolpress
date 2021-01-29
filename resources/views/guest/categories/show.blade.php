@@ -18,19 +18,9 @@
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
-                <h1>titolo Post: {{ $post->title }}</h1>
-                <p>{{ $post->content }}</p>
 
-                @if ($post->category != null) {{--mi assicuro che la categoria esista, altrimenti se fosse null mi darebbe errore nella generazione del link qui sotto--}}
-
-                    <a href="{{ route('categories.show', ['slug' => $post->category->slug]) }}">{{ $post->category->name }}</a>
-                @else
-                    <p>Nessuna Categoria</p>
-                @endif
-
-
-
-                {{-- quando scrivo $post->category, posso omettere le parentesi () x riferirmi alla funzione presente nel model Post, perche' sto gia' accedendo all' istanza della categoria associata al post in questione e se faccio dd($post->category) vedro' che mi restituisce un oggetto che rappresenta la categoria collegata al post, quindi con ->name accedo al nome della categoria --}}
+                <h1>La categoria: {{ $category->name }}</h1>
+                <strong>qui stampo nome categoria</strong>
             </div>
         </div>
     </div>

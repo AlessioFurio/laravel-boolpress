@@ -48,6 +48,7 @@ class PostController extends Controller
 
         $form_data = $request->all(); // dentro il $form_data, mi trovo tutti gli input che hanno un name come attributo nell html
         $new_post = new Post();
+        dd($new_post);
         $new_post->fill($form_data);
         // genero lo slug
         $slug = Str::slug($new_post->title);

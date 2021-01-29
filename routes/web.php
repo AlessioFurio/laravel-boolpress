@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('index'); // questa rotta punta alla home page da utenti non loggati
 Route::get('/contatti', 'HomeController@contatti')->name('contatti');
 Route::get('/posts', 'PostController@index')->name('posts.index');
-Route::get('/posts/{post}', 'PostController@show')->name('posts.show'); // creo rotta pubblica show x mostrare un certo post 
+Route::get('/posts/{post}', 'PostController@show')->name('posts.show'); // creo rotta pubblica show x mostrare un certo post
+Route::get('/categories/{slug}', 'CategoryController@show')->name('categories.show'); // creo rotta pubblica con radice categories 
 
 
 Auth::routes(['register' => false]); // Auth::routes() genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
