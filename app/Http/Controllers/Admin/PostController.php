@@ -160,6 +160,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->sync([]); // per poter eliminare un post, dobbiamo prima togliere i vincoli relativi a quel post, in questo caso tutti i tag, e lo faccio sincronizzando semplicemnte un array vuoto , allora nn ci sarebbero vincoli e la delete() nella riga successiva avrebbe successo
         $post->delete();
          return redirect()->route('admin.posts.index');
     }
