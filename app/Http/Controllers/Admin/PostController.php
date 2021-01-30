@@ -49,8 +49,9 @@ class PostController extends Controller
     {
 
         $form_data = $request->all(); // dentro il $form_data, mi trovo tutti gli input che hanno un name come attributo nell html
+
+
         $new_post = new Post();
-        dd($new_post);
         $new_post->fill($form_data);
         // genero lo slug
         $slug = Str::slug($new_post->title);
@@ -69,8 +70,9 @@ class PostController extends Controller
         }
 
         $new_post->slug = $slug;
-
         $new_post->save();
+
+        $new_post->tags()->sync($form_data['tags_selected']); // prendo oggetto post creato, richiamo la relazione tra post e tag con la funzione tags() e sincronizzo i dati nel database con sync() e passo al sync come parametro l'array dei tags selezionati dal name delle checkbox
         return redirect()->route('admin.posts.index');
 
     }
