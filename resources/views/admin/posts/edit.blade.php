@@ -36,7 +36,14 @@
                     </select>
                 </div>
 
-                
+                <div class="form-group">
+                    <p>Tags</p>
+                    @foreach ($tags as $tag)
+                        <input type="checkbox" name="tags_selected[]" value="{{$tag->id}}"
+                        {{ $post->tags->contains($tag) ? 'checked=checked' : '' }}> {{--controllo che nella collection $post->tags contiene il tag corrente?--}}
+                        <label for="">{{$tag->name}}</label>
+                    @endforeach
+                </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">
