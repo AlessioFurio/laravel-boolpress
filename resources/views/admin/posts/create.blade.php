@@ -26,11 +26,18 @@
                 <div class="form-group">
                     <label>Titolo</label>
                     <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Inserisci il titolo" required> {{--la funzione old() mi permette di "salvare i dati dell' utente e mostrarglieli anche se la creazione del post fallisce in modo da non dover ricompilare i campi"--}}
+                    @error('title')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+
                 </div>
 
                 <div class="form-group">
                     <label>Contenuto</label>
                     <textarea name="content" class="form-control" rows="10" placeholder="Inizia a scrivere qualcosa..." required>{{ old('content') }}</textarea>
+                    @error('content')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -43,6 +50,9 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('category_id')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -51,6 +61,9 @@
                         <input type="checkbox" name="tags_selected[]" value="{{$tag->id}}" {{ in_array($tag->id, old('tags_selected', [])) ? 'checked=checked' : ''}}> {{--verifico con in_array che $tag->id sia presente nell'array old('tags_selected'), se non e' presente, la funzione old utilizzera' il valore di fallback [] array vuoto in modo da non restituire errore se l'utente non ha selezionato nessun tag--}}
                         <label for="">{{$tag->name}}</label>
                     @endforeach
+                    @error('tags_selected')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group">

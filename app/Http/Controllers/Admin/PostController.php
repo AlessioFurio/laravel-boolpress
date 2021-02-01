@@ -79,7 +79,9 @@ class PostController extends Controller
         $new_post->slug = $slug;
         $new_post->save();
 
-        $new_post->tags()->sync($form_data['tags_selected']); // prendo oggetto post creato, richiamo la relazione tra post e tag con la funzione tags() e sincronizzo i dati nel database con sync() e passo al sync come parametro l'array dei tags selezionati dal name delle checkbox
+        if(array_key_exists('tags_selected', $form_data)){ // controllo se i tags esistono
+            $new_post->tags()->sync($form_data['tags_selected']); // prendo oggetto post creato, richiamo la relazione tra post e tag con la funzione tags() e sincronizzo i dati nel database con sync() e passo al sync come parametro l'array dei tags selezionati dal name delle checkbox
+        }
         return redirect()->route('admin.posts.index');
 
     }
@@ -130,6 +132,14 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+
+        $request->validate([  // validazione risultati provenienti dal form di creazione post
+            'title' => 'required|max:255', // ogni chiave dell'array ha lo stesso nome dell' attributo dell'input nel html
+            'content' => 'required',
+            'category_id' => 'nullable|exists:categories,id', // con questa istruzione 'exists:categories,id' cerco nella tabella categories se e' presente un id, con nullable invece settera' a null il valore dell'input se non seleziono nessuna categoria
+            'tags_selected' => 'exists:tags,id' // posso usare exists anche se in input dal form ricevo un array, exists controllera' ogni elemento dell'array
+        ]);
+
         {
        $form_data = $request->all();
        // verifico se il titolo ricevuto dal form è diverso dal vecchio titolo
@@ -153,8 +163,9 @@ class PostController extends Controller
            $form_data['slug'] = $slug;
        }
        $post->update($form_data);
-       $post->tags()->sync($form_data['tags_selected']);
-
+       if(array_key_exists('tags_selected', $form_data)){ // controllo se i tags esistono
+           $post->tags()->sync($form_data['tags_selected']); // prendo oggetto post creato, richiamo la relazione tra post e tag con la funzione tags() e sincronizzo i dati nel database con sync() e passo al sync come parametro l'array dei tags selezionati dal name delle checkbox
+       }
        return redirect()->route('admin.posts.index');
    }
     }
