@@ -11,11 +11,21 @@
                 </a>
             </div>
 
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('admin.posts.store') }}" method="post">
                 @csrf
                 <div class="form-group">
                     <label>Titolo</label>
-                    <input type="text" name="title" class="form-control" placeholder="Inserisci il titolo" maxlength="255" required>
+                    <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Inserisci il titolo" maxlength="255" required>
                 </div>
 
                 <div class="form-group">

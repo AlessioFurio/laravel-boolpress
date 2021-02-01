@@ -48,6 +48,13 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([  // validazione risultati provenienti dal form di creazione post
+            'title' => 'required|max:255', // ogni chiave dell'array ha lo stesso nome dell' attributo dell'input nel html
+            'content' => 'required',
+            'category_id' => 'nullable|exists:categories,id', // con questa istruzione 'exists:categories,id' cerco nella tabella categories se e' presente un id, con nullable invece settera' a null il valore dell'input se non seleziono nessuna categoria
+            'tags_selected' => 'exists:tags,id' // posso usare exists anche se in input dal form ricevo un array, exists controllera' ogni elemento dell'array
+        ]);
+
         $form_data = $request->all(); // dentro il $form_data, mi trovo tutti gli input che hanno un name come attributo nell html
 
 
