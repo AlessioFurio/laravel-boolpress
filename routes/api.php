@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/posts', 'Api\PostController@index');  // creo rotta api/posts gestita dal postcontroller in namespace Api
+Route::post('/posts', 'Api\PostController@index')->middleware('api_token_check');  // creo rotta api/posts gestita dal postcontroller in namespace Api
