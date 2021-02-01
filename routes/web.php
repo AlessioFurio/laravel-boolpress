@@ -17,7 +17,7 @@ Route::get('/', 'HomeController@index')->name('index'); // questa rotta punta al
 Route::get('/contatti', 'HomeController@contatti')->name('contatti');
 Route::get('/posts', 'PostController@index')->name('posts.index');
 Route::get('/posts/{post}', 'PostController@show')->name('posts.show'); // creo rotta pubblica show x mostrare un certo post
-Route::get('/categories/{slug}', 'CategoryController@show')->name('categories.show'); // creo rotta pubblica con radice categories 
+Route::get('/categories/{slug}', 'CategoryController@show')->name('categories.show'); // creo rotta pubblica con radice categories
 
 
 Auth::routes(['register' => false]); // Auth::routes() genera tutte le rotte x l'autenticazione(forgot password, login, logout.......)
@@ -30,5 +30,7 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->
 
     // questo viene fatto per gli utenti loggati, puo' sembrare uguale alla prima route ma non lo e' perche' si trova nel ->group(function(){}
     Route::resource('/posts', 'PostController');
+    Route::get('/profile', 'HomeController@profile')->name('profile'); // creo rotta x pagina profilo
+    Route::post('/profile/generate-token', 'HomeController@generateToken')->name('generate_token');
 
 }); // questo viene fatto perche' avremo una index sia pubblica che da utenti loggati
